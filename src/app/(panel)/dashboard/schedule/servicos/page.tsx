@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getCookieClient } from "@/lib/cookieClient";
 import { api } from "@/services/api";
-import { LuSearch, LuX } from "react-icons/lu";
+import { LuSearch} from "react-icons/lu";
 import Link from "next/link";
 
 interface Barber {
@@ -16,6 +16,10 @@ interface Service {
   name: string;
   price: number;
 }
+interface Results{
+    id: number;
+  name: string;
+}
 
 export default function BarberServiceSearch() {
   const token = getCookieClient();
@@ -26,7 +30,7 @@ export default function BarberServiceSearch() {
   const [selectedBarber, setSelectedBarber] = useState("");
   const [selectedService, setSelectedService] = useState("");
 
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Results[]>([]);
   const [loading, setLoading] = useState(false);
 
   // Carregar barbeiros e cortes na montagem
@@ -173,7 +177,7 @@ export default function BarberServiceSearch() {
           <p>Carregando...</p>
         ) : results.length > 0 ? (
           <div className="gap-2  rounded-md p-2 flex flex-col w-full">
-            {results.map((item: any) => (
+            {results.map((item) => (
               <div
                 key={item.id}
                 className="flex flex-col gap-1 border rounded-md border-gray-300 p-2"
@@ -181,18 +185,6 @@ export default function BarberServiceSearch() {
                 {item.name && (
                   <p>
                     <span className="font-semibold">Nome:</span> {item.name}
-                  </p>
-                )}
-                {item.price && (
-                  <p>
-                    <span className="font-semibold">Preço:</span> R${" "}
-                    {item.price}
-                  </p>
-                )}
-                {item.barber && (
-                  <p>
-                    <span className="font-semibold">Barbeiro:</span>{" "}
-                    {item.barber.name}
                   </p>
                 )}
               </div>

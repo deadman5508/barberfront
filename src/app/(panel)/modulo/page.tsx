@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 
 export default function Modulo() {
@@ -31,24 +31,6 @@ export default function Modulo() {
 
   // Função para desabilitar domingos
   const isSunday = (date: Date) => date.getDay() === 0;
-  const [minDate, setMinDate] = useState("");
-
-  useEffect(() => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    setMinDate(`${yyyy}-${mm}-${dd}`);
-  }, []);
-
-  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const selectedDate = new Date(e.target.value);
-    const day = selectedDate.getDay(); // 0 = domingo
-    if (day === 0) {
-      alert("Domingos não são permitidos para agendamento.");
-      e.target.value = "";
-    }
-  }
 
   return (
     <main className="flex flex-col rounded-md items-center justify-center mx-auto min-h-screen">

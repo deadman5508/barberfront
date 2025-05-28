@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { LuArrowLeft, LuLoaderCircle, LuSearch, } from "react-icons/lu";
 import { getCookieClient } from "@/lib/cookieClient";
 import Link from "next/link";
-import { AxiosError } from "axios";
 
 interface Barber {
   id: number;
@@ -40,7 +39,7 @@ export default function CreateHours() {
       setBarber(response.data);
       toast.success(`Barbeiro ${response.data.name} encontrado!`);
     } catch (err) {
-      toast.error("Colaborador não encontrado.");
+      toast.error(`Colaborador não encontrado. ${err}`);
       setBarber(null);
     } finally {
       setLoading(false);
@@ -97,11 +96,8 @@ export default function CreateHours() {
       setEndDate("");
       setStartHour("");
       setEndHour("");
-    } catch (error: any) {const err = error as AxiosError<{ error: string }>;
-    const errorMessage =
-      err.response?.data?.error || "Erro ao criar horários.";
-
-    toast.error(errorMessage);
+    } catch (error) {
+    toast.error(`Erro ao criar horários. ${error}`);
     } finally {
       setLoading(false);
     }

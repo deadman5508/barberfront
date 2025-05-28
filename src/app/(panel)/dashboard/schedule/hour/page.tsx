@@ -4,7 +4,7 @@ import { getCookieClient } from "@/lib/cookieClient";
 import { api } from "@/services/api";
 import Link from "next/link";
 import { useState } from "react";
-import { LuPencil, LuSearch, LuSave, LuX, LuTrash, LuTrash2 } from "react-icons/lu";
+import { LuSearch, LuTrash2, } from "react-icons/lu";
 import { toast } from "react-toastify";
 
 interface requestHours {
@@ -87,7 +87,7 @@ async function handleDelete(id: number) {
     setHours(updatedHours);
     toast.success("Horário deletado com sucesso!");
   } catch (error) {
-    toast.error("Erro ao deletar horário!");
+    toast.error(`Erro ao deletar horário! ${error}`);
   } finally {
     setLoading(false);
   }

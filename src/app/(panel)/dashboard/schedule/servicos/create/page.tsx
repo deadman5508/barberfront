@@ -23,7 +23,6 @@ export default function LinkBarberToHaircut() {
 
     const [barbers, setBarbers] = useState<Barber[]>([]);
     const [haircuts, setHaircuts] = useState<Haircut[]>([]);
-    const [phone, setPhone] = useState("");
     const [selectedBarber, setSelectedBarber] = useState<number|null>(null);
     const [selectedHaircut, setSelectedHaircut] = useState<number[]>([]);
 

@@ -2,11 +2,10 @@
 
 import { getCookieClient } from "@/lib/cookieClient";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {useState} from "react";
 import DatePicker from "react-datepicker";
 import { LuSearch } from "react-icons/lu";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import { api } from "@/services/api";
 
 interface ScheduleProps {
@@ -75,7 +74,7 @@ export default function Schedule() {
 
     const result = schedule.filter(
       (item) =>
-        item.appointmentBarbers.map((barberItem: any) => barberItem.barber.phone).includes(phoneFilter)|| item.customer.includes(phoneFilter)
+        item.appointmentBarbers.map((barberItem) => barberItem.barber.phone).includes(phoneFilter)|| item.customer.includes(phoneFilter)
     );
 
     setFilteredSchedule(result);
@@ -159,7 +158,7 @@ export default function Schedule() {
               </p>
               <p className="text-sm">
                 <span className="font-semibold">Colaborador:</span>{" "}
-                {item.appointmentBarbers.map((barberItem: any) => barberItem.barber.name).join(', ')}
+                {item.appointmentBarbers.map((barberItem) => barberItem.barber.name).join(', ')}
               </p>
               <p className="text-sm">
                 <span className="font-semibold">Total:</span>{" "}

@@ -4,6 +4,7 @@ import { api } from "@/services/api";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { LuPencil, LuSave, LuX } from "react-icons/lu";
+import { toast } from "react-toastify";
 
 interface requestHaircuts {
   id: number;
@@ -78,7 +79,7 @@ export default function Haircut(){
           );
           handleCancel();
         } catch (error) {
-          console.error("Erro ao atualizar cliente:", error);
+          toast.error(`Erro ao atualizar cliente: ${error}`);
         }finally{
           fetchHaircuts()
         }
@@ -100,7 +101,7 @@ export default function Haircut(){
 
       useEffect(() => {
   fetchHaircuts();
-}, [token]);
+}, [fetchHaircuts]);
 
 
 
