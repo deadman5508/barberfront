@@ -7,7 +7,16 @@ import { LuArrowLeft } from "react-icons/lu"
 import { getCookieServer } from "@/lib/cookieServer"
 
 
-export async function handleLogin(formData: FormData) {
+
+
+
+export default async function Dashboard() {
+  const token = await getCookieServer()
+
+  if (token) {
+    redirect('/dashboard/schedule')
+  }
+  async function handleLogin(formData: FormData) {
   'use server'
   const email = formData.get('email')
   const password = formData.get('password')
@@ -30,14 +39,6 @@ export async function handleLogin(formData: FormData) {
   redirect('/dashboard/schedule')
 }
 
-
-
-export default async function Dashboard() {
-  const token = await getCookieServer()
-
-  if (token) {
-    redirect('/dashboard/schedule')
-  }
 
   return (
     <div className="flex flex-col rounded-md items-center justify-center container mx-auto min-h-screen">
