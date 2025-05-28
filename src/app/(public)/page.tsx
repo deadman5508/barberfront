@@ -4,7 +4,12 @@ import { redirect } from "next/navigation"
 import { api } from "@/services/api"
 
 
-export async function handleLogin(formData: FormData) {
+
+
+
+export default function Home() {
+  
+  async function handleLogin(formData: FormData) {
   'use server'
   const phone = formData.get('phone')
   try {
@@ -28,7 +33,7 @@ export async function handleLogin(formData: FormData) {
 }
 
 
-export async function accessWithoutRegister() {
+async function accessWithoutRegister() {
   'use server'
 
   const modulov =11999999999
@@ -50,9 +55,6 @@ export async function accessWithoutRegister() {
 
   redirect('/modulo2')
 }
-
-
-export default function Home() {
   return (
     <div className="flex flex-col rounded-md items-center justify-center container mx-auto min-h-screen">
       <Header />
