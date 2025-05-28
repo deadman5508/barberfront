@@ -221,7 +221,7 @@ export default function CreateAppointment() {
       setBarbers([]);
       setSelectedHour("");
       setAvailableHours([]);
-    } catch (error) {
+    } catch (err) {
       toast.error("Erro ao criar agendamento.");
     }
   };

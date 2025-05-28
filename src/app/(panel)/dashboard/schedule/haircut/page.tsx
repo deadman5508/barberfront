@@ -2,8 +2,8 @@
 import { getCookieClient } from "@/lib/cookieClient";
 import { api } from "@/services/api";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { LuPencil, LuSave, LuSearch, LuX } from "react-icons/lu";
+import { useCallback, useEffect, useState } from "react";
+import { LuPencil, LuSave, LuX } from "react-icons/lu";
 
 interface requestHaircuts {
   id: number;
@@ -36,7 +36,7 @@ export default function Haircut(){
       }
 
 
-    async function fetchHaircuts() {
+    const fetchHaircuts = useCallback(async () => {
       try {
         const response = await api.get('/haircuts', {
           headers: {
@@ -53,7 +53,7 @@ export default function Haircut(){
         setLoading(false);
         handleCancel();
       }
-    }
+    },[token])
 
     
       async function handleSave() {
