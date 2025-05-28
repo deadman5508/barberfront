@@ -32,8 +32,7 @@ export default async function Dashboard() {
       secure: process.env.NODE_ENV === "production"
     })
 
-  } catch (err) {
-    console.log(err)
+  } catch {
     return
   }
   redirect('/dashboard/schedule')
