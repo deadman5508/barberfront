@@ -129,7 +129,7 @@ export default function Client() {
               placeholder="Telefone"
               value={phoneFilter}
               onChange={(e) => setPhoneFilter(e.target.value)}
-              className="text-pink-500 border rounded-md border-gray-300 px-3 py-2 w-full"
+              className="text-pink-500 border rounded-md border-gray-300 px-3 py-3 w-full"
             />
             <button
               type="submit"
@@ -145,7 +145,7 @@ export default function Client() {
               placeholder="CPF"
               value={cpfFilter}
               onChange={(e) => setCpfFilter(e.target.value)}
-              className="text-pink-500 border rounded-md border-gray-300 px-3 py-2 w-full"
+              className="text-pink-500 border rounded-md border-gray-300 px-3 py-3 w-full"
             />
             <button
               type="submit"

@@ -4,6 +4,7 @@ import { getCookieClient } from "@/lib/cookieClient";
 import { api } from "@/services/api";
 import Link from "next/link";
 import { useState } from "react";
+import DatePicker from "react-datepicker";
 import { LuSearch, LuTrash2, } from "react-icons/lu";
 import { toast } from "react-toastify";
 
@@ -23,7 +24,7 @@ export default function Hour() {
 
   const [loading, setLoading] = useState(false);
   const [hours, setHours] = useState<requestHours[]>([]);
-  const [timeFilter, setTimeFilter] = useState("");
+  const [timeFilter, setTimeFilter] = useState<Date | null>(null);
   const [barberFilter, setBarberFilter] = useState<requestBarber | null>(null);
   const [phoneFilter,setPhoneFilter]=useState("")
 
@@ -52,7 +53,7 @@ async function searchByPhone(e: React.FormEvent) {
     // Buscar horários disponíveis
     const response = await api.get("/hours/me", {
       params: { 
-        time: timeFilter,
+        time: timeFilter.toISOString().split("T")[0],
         barber_id: barber.id
       },
       headers: { Authorization: `Bearer ${token}` },
@@ -114,11 +115,15 @@ async function handleDelete(id: number) {
               className="text-pink-500 border rounded-md border-gray-300 px-3 py-2 w-full"
             />
             
-            <input
-              type="date"
-              value={timeFilter}
-              onChange={(e) => setTimeFilter(e.target.value)}
-              className="text-pink-500 border rounded-md border-gray-300 px-3 py-2 w-full"
+
+
+            <DatePicker
+              selected={timeFilter}
+              onChange={(date) => setTimeFilter(date)}
+              placeholderText="Data"
+              className="border text-pink-500 border-gray-300 rounded-md px-3 py-2"
+              calendarClassName="react-datepicker"
+              dateFormat="dd/MM/yyyy"
             />
 
             <div className="flex gap-2">
@@ -136,7 +141,7 @@ async function handleDelete(id: number) {
             onClick={() => {
               setHours([]);
               setPhoneFilter("");
-              setTimeFilter("");
+              setTimeFilter(null);
               setBarberFilter(null);
             }}
             className="text-sm text-blue-500 hover:underline"

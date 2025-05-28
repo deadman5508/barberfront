@@ -110,9 +110,10 @@ export default function Createhaircut(){
                       placeholder="Preço"
                       required
                     />
+                    <label htmlFor="text">Duração em minutos:</label>
                     <input
                       type="number"
-                      value={editData.duration || 1}
+                      value={editData.duration}
                       onChange={(e) => handleChangeInput(e, "duration")}
                       className="border rounded px-2 py-1"
                       placeholder="Duração"

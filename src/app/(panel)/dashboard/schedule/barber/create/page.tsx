@@ -69,13 +69,13 @@ export default function CreateClient(){
                 <div className="mb-4">
                     <h1>Cadastrar Colaborador</h1>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <div className="flex flex-col gap-2">
+                <form onSubmit={handleSubmit} className="w-full">
+                    <div className="flex flex-col gap-2 w-full">
                     <input
                       type="text"
                       value={editData.name || ""}
                       onChange={(e) => handleChangeInput(e, "name")}
-                      className="border rounded px-2 py-1"
+                      className="border rounded px-2 py-3 w-full"
                       placeholder="Nome"
                       required
                     />
@@ -83,7 +83,7 @@ export default function CreateClient(){
                       type="text"
                       value={editData.phone || ""}
                       onChange={(e) => handleChangeInput(e, "phone")}
-                      className="border rounded px-2 py-1"
+                      className="border rounded px-2 py-3 w-full"
                       placeholder="Telefone"
                       required
                     />
@@ -91,21 +91,21 @@ export default function CreateClient(){
                       type="text"
                       value={editData.document || ""}
                       onChange={(e) => handleChangeInput(e, "document")}
-                      className="border rounded px-2 py-1"
+                      className="border rounded px-2 py-3 w-full"
                       placeholder="CPF"
                     />
                     <input
                       type="text"
                       value={editData.address || ""}
                       onChange={(e) => handleChangeInput(e, "address")}
-                      className="border rounded px-2 py-1"
+                      className="border rounded px-2 py-3 w-full"
                       placeholder="Endereço"
                     />
                     <input
                       type="text"
                       value={editData.cep || ""}
                       onChange={(e) => handleChangeInput(e, "cep")}
-                      className="border rounded px-2 py-1"
+                      className="border rounded px-2 py-3 w-full"
                       placeholder="CEP"
                     />
                     <input
@@ -118,11 +118,11 @@ export default function CreateClient(){
                           : ""
                       }
                       onChange={(e) => handleChangeInput(e, "birthday")}
-                      className="border rounded px-2 py-1"
+                      className="border rounded px-2 py-3 w-full"
                     />
                     <button
                     type="submit"
-                    className="bg-pink-500 text-white rounded px-4 py-2 hover:bg-white hover:text-pink-500 transition"
+                    className="bg-pink-500 w-full text-white rounded px-4 py-3 hover:bg-white hover:text-pink-500 transition"
                     >Cadastrar</button>
                   </div>
                 </form>

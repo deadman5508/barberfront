@@ -124,10 +124,10 @@ export default function Schedule() {
           >
             <input
               type="text"
-              placeholder="Telefone ou Cliente"
+              placeholder="Telefone Colaborador"
               value={phoneFilter}
               onChange={(e) => setPhoneFilter(e.target.value)}
-              className="text-pink-500 border rounded-md border-gray-300 px-3 py-2"
+              className="text-pink-500 border rounded-md border-gray-300 px-3 py-2 w-full"
             />
             <button
               type="submit"
