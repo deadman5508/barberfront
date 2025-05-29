@@ -6,6 +6,7 @@ import {getModuleCookieClient } from "@/lib/cookieClient";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import { format, parseISO} from "date-fns";
+import { useRouter } from "next/router";
 
 interface CustomerRequest {
   id: number;
@@ -31,6 +32,7 @@ interface Hour {
 
 export default function CreateAppointment() {
   const tokenm = getModuleCookieClient();
+  const router = useRouter();
 
   const [customer, setCustomer] = useState<CustomerRequest | null>(null);
 
@@ -227,6 +229,7 @@ export default function CreateAppointment() {
       setBarbers([]);
       setSelectedHour("");
       setAvailableHours([]);
+      router.push("/");
     } catch (err){
       toast.error(`Erro ao criar agendamento ${err}`);
     }
