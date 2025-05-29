@@ -184,7 +184,7 @@ export default function BarberServiceSearch() {
               >
                 {item.name && (
                   <p>
-                    <span className="font-semibold">Nome:</span> {item.name}
+                    <span className="font-semibold"></span> {item.name}
                   </p>
                 )}
               </div>

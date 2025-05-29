@@ -5,7 +5,7 @@ import { api } from "@/services/api";
 import { getCookieClient } from "@/lib/cookieClient";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-import { format } from "date-fns";
+import { format} from "date-fns";
 
 interface Client {
   id: number;
@@ -37,6 +37,7 @@ export default function CreateAppointment() {
   const [client, setClient] = useState<Client | null>(null);
   const [customer, setCustomer] = useState("");
 
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | null>(null);
 
@@ -144,8 +145,13 @@ export default function CreateAppointment() {
           },
           headers: { Authorization: `Bearer ${token}` },
         });
-
         setAvailableHours(response.data);
+        const hours = response.data;
+      setAvailableHours(hours);
+
+      if (hours.length === 0) {
+        toast.info("Nenhum horário disponível para essa data.");
+      }
       } catch {
         toast.error("Erro ao buscar horários disponíveis.");
         setAvailableHours([]);
@@ -177,10 +183,12 @@ export default function CreateAppointment() {
       barberIds.find((b) => b.haircutId === haircutId)
     );
 
+
     if (!allBarbersSelected) {
       toast.error("Selecione um profissional para cada serviço!");
       return;
     }
+    
 
     if (!client) {
       toast.error("Busque um cliente antes de agendar.");
@@ -191,6 +199,20 @@ export default function CreateAppointment() {
       toast.error("Selecione um horário disponível.");
       return;
     }
+
+
+
+    // calculo de horario intervalo minimo
+    //   const formathour = `${format(date as Date, "yyyy-MM-dd")}T${selectedHour}`
+    //   const scheduledDate = parseISO(formathour)
+    //   const now=new Date()
+    //   const minDifference = 4 * 60 * 60 * 1000;
+    //   if (scheduledDate.getTime() - now.getTime() < minDifference) {
+    //   toast.error("Agendamento mínimo de 4 horas de diferença");
+    // return;
+    // }
+ 
+
 
     try {
       await api.post(
@@ -224,7 +246,7 @@ export default function CreateAppointment() {
     } catch{
       toast.error("Erro ao criar agendamento.");
     }
-  };
+  }
 
   const haircutsTrue = haircuts.filter((cut) => cut.status === true);
   const haircutsFalse = haircuts.filter((cut) => cut.status === false);
@@ -239,7 +261,7 @@ export default function CreateAppointment() {
             placeholder="Telefone do Cliente"
             value={clientPhone}
             onChange={(e) => setClientPhone(e.target.value)}
-            className="border px-3 py-2 mb-2 rounded-md w-full"
+            className="border px-3 py-2 mb-2 rounded-md w-full border-gray-300"
           />
           <button
             type="submit"
@@ -263,7 +285,18 @@ export default function CreateAppointment() {
         {/* 📅 Formulário */}
         <form onSubmit={handleSubmit} className="flex flex-col w-full gap-3">
           {/* ✅ Serviços Ativos */}
-          <div className="flex flex-col gap-2">
+
+          <label className="mb-2">
+              <label className="text-black" htmlFor="text">Nome:</label>
+              <input
+                type="text"
+                placeholder="Digite o nome"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border px-3 py-2 rounded-md w-full mt-2 border-gray-300"
+              />
+            </label>
+          <div className="flex flex-col gap-2 border px-2 py-3 rounded-md border-gray-300">
             <label className="font-medium">Cabelo:</label>
             {haircutsTrue.map((cut) => (
               <label key={cut.id} className="flex items-center gap-2">
@@ -284,7 +317,7 @@ export default function CreateAppointment() {
                 {cut.name} - A partir de R$ {cut.price}
               </label>
             ))}
-          </div>
+          
 
           {/* ✅ Serviços Inativos */}
           <div className="flex flex-col gap-2">
@@ -309,6 +342,7 @@ export default function CreateAppointment() {
               </label>
             ))}
           </div>
+          </div>
 
           {/* 🔥 Profissionais */}
           {selectedHaircuts.map((haircutId) => {
@@ -318,7 +352,7 @@ export default function CreateAppointment() {
             return (
               <div
                 key={haircutId}
-                className="flex flex-col gap-2 border p-2 rounded-md"
+                className="flex flex-col gap-2 border p-2 rounded-md border-gray-300"
               >
                 <span className="font-semibold">{haircut?.name}</span>
 
@@ -348,7 +382,8 @@ export default function CreateAppointment() {
               onChange={(date) => setDate(date)}
               dateFormat="dd/MM/yyyy"
               placeholderText="Escolha a data"
-              className="border px-3 py-2 rounded-md w-full"
+              minDate={new Date()}
+              className="border px-3 py-2 rounded-md w-full border-gray-300"
             />
           </div>
 
@@ -359,7 +394,7 @@ export default function CreateAppointment() {
               <select
                 value={selectedHour}
                 onChange={(e) => setSelectedHour(e.target.value)}
-                className="border px-3 py-2 rounded-md w-full"
+                className="border px-3 py-2 rounded-md w-full border-gray-300"
                 required
               >
                 <option value="">Selecione um horário</option>
@@ -378,7 +413,7 @@ export default function CreateAppointment() {
             placeholder="Descrição (opcional)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="border px-3 py-2 rounded-md"
+            className="border px-3 py-2 rounded-md border-gray-300"
           />
 
           <button
