@@ -200,20 +200,6 @@ export default function CreateAppointment() {
       return;
     }
 
-
-
-    // calculo de horario intervalo minimo
-    //   const formathour = `${format(date as Date, "yyyy-MM-dd")}T${selectedHour}`
-    //   const scheduledDate = parseISO(formathour)
-    //   const now=new Date()
-    //   const minDifference = 4 * 60 * 60 * 1000;
-    //   if (scheduledDate.getTime() - now.getTime() < minDifference) {
-    //   toast.error("Agendamento mínimo de 4 horas de diferença");
-    // return;
-    // }
- 
-
-
     try {
       await api.post(
         "/appointment",

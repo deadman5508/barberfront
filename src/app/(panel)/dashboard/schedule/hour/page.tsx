@@ -187,9 +187,12 @@ async function handleDelete(id: number) {
             ))}
           </div>
         ) : (
-          <h1 className="text-center text-gray-500">
-            Nenhum cliente encontrado
-          </h1>
+          <span className="text-center text-gray-500">
+            Nenhum colaborador encontrado
+            <p>
+              Pesquise novamente
+            </p>
+          </span>
         )}
       </div>
     </div>

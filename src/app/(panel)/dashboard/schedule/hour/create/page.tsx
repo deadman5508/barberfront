@@ -76,6 +76,8 @@ export default function CreateHours() {
 
     setLoading(true);
 
+    
+
     try {
       const response = await api.post("/hours", {
         barber_id: Number(barber.id),
@@ -127,9 +129,14 @@ export default function CreateHours() {
         </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="flex w-full items-center justify-center">
+        {barber ? (
+          <div className="flex w-full items-center justify-center">
             <h2>{barber?.name}</h2>
-        </div>
+          </div>
+        ):(<div className="flex w-full items-center justify-center">
+            <h2>Pesquise seu colaborador</h2>
+          </div>
+          )}
 
         <label>
           Data Inicial:
