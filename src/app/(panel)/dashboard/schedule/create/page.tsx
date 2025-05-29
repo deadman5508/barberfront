@@ -218,7 +218,7 @@ export default function CreateAppointment() {
       await api.post(
         "/appointment",
         {
-          name: `Agendamento ${customer}`,
+          name:name,
           customer: customer,
           date: `${format(date as Date, "yyyy-MM-dd")}T${selectedHour}`,
           description,
