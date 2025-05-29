@@ -98,9 +98,8 @@ export default function CreateHours() {
       setEndDate("");
       setStartHour("");
       setEndHour("");
-    } catch (error) {
-    toast.error(`Erro ao criar horários. ${error}`);
-    console.log(error)
+    } catch  {
+    toast.error('Horarios já existem');
     } finally {
       setLoading(false);
     }
