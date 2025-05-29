@@ -6,7 +6,9 @@ import {getModuleCookieClient } from "@/lib/cookieClient";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import { format, parseISO} from "date-fns";
-import { useRouter } from "next/router";
+import Link from "next/link";
+import { LuArrowLeft } from "react-icons/lu";
+import { useRouter } from "next/navigation";
 
 interface CustomerRequest {
   id: number;
@@ -243,6 +245,9 @@ export default function CreateAppointment() {
   return (
     <div className="flex flex-col rounded-md items-center justify-center mx-auto min-h-screen">
       <div className="bg-white mb-20 container flex flex-col p-6 rounded-xl shadow-md w-full items-center justify-center max-w-sm">
+        <div>
+          <Link href='/' className=" border border-gray-300 items-center justify-center flex w-fit gap-2 px-2 py-1 hover:bg-gray-100 rounded-md"><LuArrowLeft/>voltar</Link>
+        </div>
 
         {/* ✅ Nome do Cliente */}
         <div className="mb-4">
