@@ -100,6 +100,7 @@ export default function CreateHours() {
       setEndHour("");
     } catch (error) {
     toast.error(`Erro ao criar horários. ${error}`);
+    console.log(error)
     } finally {
       setLoading(false);
     }
